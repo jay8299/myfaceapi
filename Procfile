@@ -1,1 +1,1 @@
-web:gunicorn flaskfacerecogAPI:app
+web gunicorn flaskfacerecogAPI:app
