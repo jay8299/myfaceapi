@@ -1,9 +1,8 @@
 import face_recognition as fr
-import cv2
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 import os
 import numpy as np
-import io
+
 
 def get_encoded_faces():
     encoded = {}
@@ -29,7 +28,6 @@ def classify_face(im):
         # See if the face is a match for the known face(s)
         matches = fr.compare_faces(faces_encoded, face_encoding)
         name = "Unknown"
-
         # use the known face with the smallest distance to the new face
         face_distances = fr.face_distance(faces_encoded, face_encoding)
         best_match_index = np.argmin(face_distances)
@@ -57,10 +55,8 @@ def learning():
     print(request.files)
     image=request.files['testimage']
     if image:
-        in_memory_file = io.BytesIO()
-        image.save(in_memory_file)
-        img = np.fromstring(in_memory_file.getvalue(), dtype=np.uint8)
-        img = cv2.imdecode(img,1)
+        image=image.save('test.jpg')
+        img = fr.load_image_file('./test.jpg')
         print(img.shape)
         print("in here",img)
         c_face = classify_face(img)
