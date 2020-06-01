@@ -6,7 +6,7 @@ import numpy as np
 def get_encoded_faces():
     encoded = {}
     for dirpath, dnames, fnames in os.walk("./faces"):
-        print(fnames)
+        #print(fnames)
         for f in fnames:
             if f.endswith(".jpg") or f.endswith(".png"):
                 face = fr.load_image_file("./faces/" + f)
@@ -15,12 +15,12 @@ def get_encoded_faces():
     return encoded
 def classify_face(im):
     global faces
-    print(faces)
+    #print(faces)
     faces_encoded = list(faces.values())
     known_face_names = list(faces.keys())
     img = im[:,:,::-1]
     face_locations = fr.face_locations(img)
-    print(face_locations)
+    #print(face_locations)
     unknown_face_encodings = fr.face_encodings(img, face_locations)
     face_names = []
     for face_encoding in unknown_face_encodings:
@@ -40,7 +40,6 @@ app = Flask(__name__, template_folder='templates', static_folder='static_files')
 app.secret_key="i am the secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16*1024*1024
 
-
 @app.route("/")
 def get_data():
     global faces
@@ -49,15 +48,15 @@ def get_data():
     #print(result)
     return render_template('front_page.html',result=result)
 
-@app.route("/",methods=["POST"])
+@app.route("/learning",methods=["POST"])
 def learning():
     print(request.files)
     image=request.files['testimage']
     if image:
         image=image.save('test.jpg')
         img = fr.load_image_file('./test.jpg')
-        print(img.shape)
-        print("in here",img)
+        #print(img.shape)
+        #print("in here",img)
         c_face = classify_face(img)
         result={'number_of_persons':len(c_face) ,'person_names': list(c_face)}
         return render_template('display_page.html',result=result)
