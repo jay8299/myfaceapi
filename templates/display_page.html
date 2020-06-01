@@ -1,24 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-</head>
-<body>
-<html>
-   <body>
+{% extends 'base.html' %}
+   {% block content %}
       <table border = 1>
          {% for key, value in result.items() %}
             <tr>
-               <th> {{ key }} </th>
-               <td> {{ value }} </td>
-                <img src="data:image/jpeg;base64,{{ image | safe }}">
+               <th align="center"> {{ key }} </th>
+               <td align="center"> {{ value }} </td>
             </tr>
          {% endfor %}
       </table>
-   </body>
-</html>
-</body>
-</html>
+   {% endblock %}

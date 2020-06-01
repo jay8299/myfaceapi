@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand" href="/">Facerecogition</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item-active">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<h1>Upload An Image File</h1>
-<form id="uploadbanner" enctype="multipart/form-data" method="post" action="/learning">
-    <input type="file" name="testimage" id="image">
-    <br>
-    <input type="submit" value="submit" id="submit"/>
-</form>
-<h3>Avalable Samples in dataset</h3>
-     <table border = 1>
-         {% for key, value in result.items() %}
-            <tr>
-               <th> {{ key }} </th>
-               <td> {{ value }} </td>
-            </tr>
-         {% endfor %}
-      </table>
+{% extends 'base.html' %}
 
-</body>
-</html>
+
+{% block content %}
+<div class="card" style="width: auto">
+      <div class="card-body" align="center">
+    <h5 class="card-title">Upload an Image</h5>
+          <form id="uploadbanner" enctype="multipart/form-data" method="post" action="/">
+              <input type="file" name="testimage" id="image">
+              <br>
+              <br>
+              <input class="btn btn-primary" type="submit" value="submit" id="submit"/>
+            </form>
+      </div>
+</div>
+<br>
+<div align="center">
+<div class="card" style="width: 18rem;" >
+  <div class="card-header">
+    <strong><h4>Available Employees</h4></strong>
+  </div>
+  <ul class="list-group list-group-flush">
+      {% for key, value in result.items() %}
+    <li class="list-group-item">{{ value }}</li>
+      {% endfor %}
+  </ul>
+</div>
+</div>
+{% endblock %}

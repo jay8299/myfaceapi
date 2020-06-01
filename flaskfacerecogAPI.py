@@ -49,8 +49,7 @@ def get_data():
     #print(result)
     return render_template('front_page.html',result=result)
 
-
-@app.route("/learning",methods=["POST"])
+@app.route("/",methods=["POST"])
 def learning():
     print(request.files)
     image=request.files['testimage']
