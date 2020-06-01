@@ -1,8 +1,7 @@
 import face_recognition as fr
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request , jsonify
 import os
 import numpy as np
-
 
 def get_encoded_faces():
     encoded = {}
@@ -47,6 +46,7 @@ def get_data():
     global faces
     faces=get_encoded_faces()
     result={ i:k for i,k in enumerate(faces.keys()) }
+    #print(result)
     return render_template('front_page.html',result=result)
 
 
